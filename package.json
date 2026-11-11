@@ -1,0 +1,13 @@
+{
+  "name": "clip-cutter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Paste a video link, find the funny and controversial moments, render vertical clips.",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.8.1"
+  }
+}
