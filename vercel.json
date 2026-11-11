@@ -1,7 +1,25 @@
 {
   "outputDirectory": "public",
   "functions": {
-    "api/*.js": {
+    "api/config.js": {
+      "maxDuration": 60
+    },
+    "api/transcript.js": {
+      "maxDuration": 60
+    },
+    "api/moments.js": {
+      "maxDuration": 300
+    },
+    "api/accounts.js": {
+      "maxDuration": 60
+    },
+    "api/blob-upload.js": {
+      "maxDuration": 60
+    },
+    "api/post.js": {
+      "maxDuration": 60
+    },
+    "api/post-status.js": {
       "maxDuration": 60
     }
   }

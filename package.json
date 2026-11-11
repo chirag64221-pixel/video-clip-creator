@@ -8,6 +8,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@vercel/blob": "2.8.1"
+    "@anthropic-ai/sdk": "1.8.0",
+    "@vercel/blob": "2.9.0"
   }
 }

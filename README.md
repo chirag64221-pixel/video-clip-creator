@@ -45,8 +45,14 @@ Rendering happens on your device. Finished clips are uploaded to your own Vercel
 1. **Put the code on GitHub.** Create a new repository on github.com and upload everything in this folder except `node_modules` (drag and drop works on the GitHub website).
 2. **Import it into Vercel.** vercel.com → Add New → Project → pick the repository. Framework preset: **Other**. Leave the build settings empty.
 3. **Add the keys.** In Environment Variables, add `ANTHROPIC_API_KEY`, `SUPADATA_API_KEY`, `UPLOADPOST_API_KEY` and `ACCESS_CODE`. Click **Deploy**.
-4. **Add storage.** In your project, open **Storage → Create Database → Blob**, then connect it to this project. Vercel adds `BLOB_READ_WRITE_TOKEN` for you. Then go to **Deployments** and **Redeploy** the latest one.
+4. **Add storage.** In your project, open **Storage → Create Database → Blob**. Set access to **Public** (the posting service has to download each clip from it) and tick **Add a read-write token env var to this connection**, so Vercel adds `BLOB_READ_WRITE_TOKEN`. Then go to **Deployments** and **Redeploy** the latest one.
 5. **Connect your accounts.** Open your site, enter the access code, and tap **Connect accounts**. Sign in to each platform, then tap **Back to Clip Cutter**.
+
+## Costs and limits on Vercel's free plan
+
+Vercel's free **Hobby** plan runs the `api/` functions at no cost, within its monthly limits. Hobby is for personal, non-commercial use, so if you clip for paid campaigns, Vercel expects you to be on the Pro plan. Rendering happens in your browser, so it doesn't use Vercel's limits. Keep the tab open while clips render: each one takes about as long as the clip itself.
+
+GitHub Pages can't run this app, because the `api/` functions need a server to keep your keys secret.
 
 ## Platform rules to know
 
@@ -62,7 +68,7 @@ Rendering happens on your device. Finished clips are uploaded to your own Vercel
 ## Optional settings
 
 - `UPLOADPOST_USER`: the profile name on Upload-Post. Default: `clip-cutter`.
-- `CLAUDE_MODEL`: use a different Claude model. Default: `claude-sonnet-5-5`.
+- `CLAUDE_MODEL`: use a different Claude model. Default: `claude-sonnet-5-5`. If Claude's safety check declines a transcript, the request is retried on a fallback model automatically.
 
 ## Files
 
@@ -81,6 +87,7 @@ public/js/app.js     the app: projects, clip grid, editor, posting, brand kit
 public/js/engine.js  the renderer: reframe, captions, zooms, jump cuts, music, export
 public/js/faces.js   face tracking and thumbnails
 public/vendor/blob-client.js   bundled upload helper from the @vercel/blob package
+                               (rebuild: npx esbuild with `export { upload } from "@vercel/blob/client"`)
 tools/clip_cutter.py optional computer script: download + cut with ffmpeg
 ```
 
